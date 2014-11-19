@@ -126,28 +126,26 @@ def findPos(nbrs, locs): #returns the position dictionary which has possibiliies
 
 
 def fill(posMatrix, matrix):
-	for key in posMatrix:
-		r = key[0];
-		c = key[1]
-		pos = posMatrix[key];
-		if len(pos) == 1:
-			matrix[r][c] = pos[0];
-		else:
-			for val in pos:
-				tempM = [];
-				tempM = matrix[:];
-				tempM[r][c] = val;
-				temp = {};
-				temp = posMatrix.copy();
-				lst = temp[key];
-				lst.remove(val);
-				temp[key] = lst;
-				fill(temp, tempM);
-	for row in matrix:
-		for col in row:
-			if col == '.':
-				print('not finished yet')
-	return matrix;
+	if isSolved(matrix):
+		return matrix;
+	else:
+		for key in posMatrix:
+			r = key[0];
+			c = key[1]
+			pos = posMatrix[key];
+			if len(pos) == 1:
+				matrix[r][c] = pos[0];
+			else:
+				for val in pos:
+					tempM = [];
+					tempM = matrix[:];
+					tempM[r][c] = val;
+					temp = {};
+					temp = posMatrix.copy();
+					lst = temp[key];
+					lst.remove(val);
+					temp[key] = lst;
+					fill(temp, tempM);
 
 matrix = crMat(0);
 print(isSolved(matrix));
