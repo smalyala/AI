@@ -11,7 +11,10 @@ def quad(lst, r, c):
 		boundC = 6;
 	elif c < 9:
 		boundC = 9;
+	r = boundR - 3;
+	c = boundC - 3;
 	while r < boundR:
+		c = boundC-3;
 		while c < boundC:
 			ch = matrix[r][c];
 			if ch != '.' and ch not in lst:
@@ -93,8 +96,8 @@ def findNbrs(matrix): #returns the neighbor dictionary for the location tuple (r
 		r += 1;
 	return (nbrs, locs);
 
-def crMat(ind):
-	fil = open('sudokuMedium.txt', 'r');
+def crMat(ind, fi):
+	fil = open(fi, 'r');
 	whole = [];
 	for line in fil:
 		line = line.strip('\n');
@@ -125,37 +128,43 @@ def findPos(nbrs, locs): #returns the position dictionary which has possibiliies
 	return posMatrix;
 
 
-def fill(posMatrix, matrix):
+def fill(posMatrix, matrix, count):
+	if isComplete(matrix):
+		disp(matrix);
 	if isSolved(matrix):
+		disp(matrix)
+		print('done')
 		return matrix;
-	else:
-		for key in posMatrix:
-			r = key[0];
-			c = key[1]
-			pos = posMatrix[key];
-			if len(pos) == 1:
-				matrix[r][c] = pos[0];
-			else:
-				for val in pos:
-					tempM = [];
-					tempM = matrix[:];
-					tempM[r][c] = val;
-					temp = {};
-					temp = posMatrix.copy();
-					lst = temp[key];
-					lst.remove(val);
-					temp[key] = lst;
-					fill(temp, tempM);
+	for key in posMatrix:
+		r = key[0];
+		c = key[1]
+		pos = posMatrix[key];
+		for val in pos:
+			tempM = matrix[:];
+			tempM[r][c] = val;
+			(nbrs, locs) = findNbrs(tempM);
+			tempP = findPos(nbrs, locs);
+			return fill(tempP, tempM, count);
 
-matrix = crMat(0);
-print(isSolved(matrix));
-for val in matrix:
-	print(val);
-print('');
-print('');
+def disp(matrix):
+	print('');
+	print('');
+	for val in matrix:
+		print(val);
+
+def isComplete(matrix):
+	for r in matrix:
+		for c in r:
+			if c == '.':
+				return False;
+	return True;
+
+def kep(count):
+	return count + 1;
+
+
+matrix = crMat(9, 'sudokuMedium.txt');
+disp(matrix);
 (nbrs, locs) = findNbrs(matrix);
 posMatrix = findPos(nbrs, locs);
-matrix = fill(posMatrix, matrix);
-for val in matrix:
-	print(val);
-print('here')
+fill(posMatrix, matrix, 0);
