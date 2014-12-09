@@ -39,18 +39,15 @@ class Node(object):
 		self.children[stng[0]].insert(stng[1:]);
 
 	def search(self, stng):
-		print(self.children);
-		if '$' in self.children and self.value != '*' and len(stng) == 0:
+		if len(stng) == 0 and '$' in self.children:
 			return True;
+		elif len(stng) == 0:
+			return False;
 		val = stng[0];
-		print(val);
 		if val in self.children:
-			print('recur');
 			return self.children[val].search(stng[1:]);
 		else:
-			print('did not find')
 			return False;
-		print('why here')
 
 
 def main():
@@ -66,7 +63,7 @@ def main():
 	root.insert('dognip');
 	root.insert('');
 	root.display();
-	print('SEARCH:', root.search('dogn'));
+	print('SEARCH:', root.search('dognip'));
 	printElapsedTime();
 
 def printElapsedTime():
