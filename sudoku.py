@@ -1,3 +1,10 @@
+#################################################
+#Name: Sahith Malyala  Date: 11/20/14   Period: 1
+#################################################
+
+
+from copy import deepcopy
+
 def quad(lst, r, c):
 	if r < 3:
 		boundR = 3;
@@ -96,7 +103,7 @@ def findNbrs(matrix): #returns the neighbor dictionary for the location tuple (r
 		r += 1;
 	return (nbrs, locs);
 
-def crMat(ind, fi):
+def createMat(ind, fi):
 	fil = open(fi, 'r');
 	whole = [];
 	for line in fil:
@@ -128,23 +135,31 @@ def findPos(nbrs, locs): #returns the position dictionary which has possibiliies
 	return posMatrix;
 
 
-def fill(posMatrix, matrix, count):
-	if isComplete(matrix):
-		disp(matrix);
+def fill(posMatrix, matrix):
 	if isSolved(matrix):
 		disp(matrix)
-		print('done')
-		return matrix;
-	for key in posMatrix:
-		r = key[0];
-		c = key[1]
-		pos = posMatrix[key];
-		for val in pos:
-			tempM = matrix[:];
-			tempM[r][c] = val;
-			(nbrs, locs) = findNbrs(tempM);
-			tempP = findPos(nbrs, locs);
-			return fill(tempP, tempM, count);
+		return True;
+	else:
+		count = 0;
+		for key in posMatrix:
+			if count == 0:
+				mink = key;
+				count += 1;
+			elif len(posMatrix[mink]) > len(posMatrix[key]):
+				mink = key;
+		if len(posMatrix) > 0:
+			pos = posMatrix[mink]
+			r = mink[0];
+			c = mink[1];
+			for val in pos:
+				tempM = deepcopy(matrix);
+				tempM[r][c] = val;
+				(nbrs, locs) = findNbrs(tempM);
+				tempP = findPos(nbrs, locs);
+				x= fill(tempP, tempM);
+				if x : return x
+		return False
+
 
 def disp(matrix):
 	print('');
@@ -152,19 +167,10 @@ def disp(matrix):
 	for val in matrix:
 		print(val);
 
-def isComplete(matrix):
-	for r in matrix:
-		for c in r:
-			if c == '.':
-				return False;
-	return True;
 
-def kep(count):
-	return count + 1;
-
-
-matrix = crMat(9, 'sudokuMedium.txt');
+matrix = createMat(0, 'test.txt');
 disp(matrix);
 (nbrs, locs) = findNbrs(matrix);
 posMatrix = findPos(nbrs, locs);
-fill(posMatrix, matrix, 0);
+fill(posMatrix, matrix);
+
