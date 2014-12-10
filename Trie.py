@@ -1,5 +1,6 @@
 from sys import setrecursionlimit; setrecursionlimit(100)
 from time import clock
+from random import choice
 
 class Node(object):
 
@@ -49,12 +50,26 @@ class Node(object):
 		else:
 			return False;
 
+	def randomChild(self):
+		children = self.children;
+		return choice(list(children.keys()));
+
+	def searchForNextLetter(self, stng):
+		if len(stng) == 0:
+			return self.randomChild();
+		val = stng[0];
+		if val in self.children:
+			return self.children[val].searchForNextLetter(stng[1:]);
+		else:
+			return None;
+
+
 	def fragmentInDictionary(self, stng):
 		if len(stng) == 0:
 			return True;
 		val = stng[0];
 		if val in self.children:
-			return self.children[val].search(stng[1:]);
+			return self.children[val].fragmentInDictionary(stng[1:]);
 		else:
 			return False;
 

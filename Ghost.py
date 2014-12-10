@@ -1,4 +1,3 @@
-from random import choice
 import Trie
 
 def printGhostDirections():
@@ -28,7 +27,7 @@ def requestAndCheckHumanMove(root, stng):
 	return stng;
 
 def requestAndCheckComputerMove(root, stng):
-	stng += searchForNextLetter(root, stng);
+	stng += root.searchForNextLetter(stng);
 	print(' ', stng, '<-- computer replied');
 	if root.search(stng) == True:
 		print('------------------------------------------');
@@ -37,6 +36,9 @@ def requestAndCheckComputerMove(root, stng):
 		exit();
 	return stng;
 
+def spellWordFromString(root, stng):
+	return 'NOT WORKING YET';
+
 def createTrieFromDictionaryFile():
 	file1 = open('GhostDictionary.py');
 	root = Trie.Node('*');
@@ -44,19 +46,6 @@ def createTrieFromDictionaryFile():
 		root.insert(word.lower().strip());
 	file1.close();
 	return root;
-
-def randomChild(self):
-	children = self.children;
-	return choice(list(children.keys()));
-
-def searchForNextLetter(self, stng):
-	if len(stng) == 0:
-		return randomChild(self);
-	val = stng[0];
-	if val in self.children:
-		return self.children[val].search(stng[1:]);
-	else:
-		return None;
 
 def main():
 	root = createTrieFromDictionaryFile();
