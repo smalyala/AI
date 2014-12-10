@@ -63,7 +63,7 @@ def main():
 	root.insert('dognip');
 	root.insert('');
 	root.display();
-	print('SEARCH:', root.search('dognip'));
+	print('SEARCH:', root.search(""));
 	printElapsedTime();
 
 def printElapsedTime():
