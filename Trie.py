@@ -49,6 +49,15 @@ class Node(object):
 		else:
 			return False;
 
+	def fragmentInDictionary(self, stng):
+		if len(stng) == 0:
+			return True;
+		val = stng[0];
+		if val in self.children:
+			return self.children[val].search(stng[1:]);
+		else:
+			return False;
+
 
 def main():
 	root = Node('*');
