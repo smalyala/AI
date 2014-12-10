@@ -17,7 +17,7 @@ def requestAndCheckHumanMove(root, stng):
 		print(' HUMAN LOSES because "', stng, '" is a word.', sep = '');
 		print('---------------< GAME OVER >--------------');
 		exit();
-	if root.fragmentInDictinoary(stng) == False:
+	if root.fragmentInDictionary(stng) == False:
 		print('------------------------------------------');
 		print(' HUMAN LOSES because "', stng, \
 			  '"\n does not begin any word.', sep = '');
@@ -38,6 +38,15 @@ def createTrieFromDictionaryFile():
 def randomChild(self):
 	children = self.children;
 	return choice(list(children.keys()));
+
+def fragmentInDictionary(self, stng):
+	if len(stng) == 0:
+		return True;
+	val = stng[0];
+	if val in self.children:
+		return self.children[val].search(stng[1:]);
+	else:
+		return False;
 
 def main():
 	root = createTrieFromDictionaryFile();
