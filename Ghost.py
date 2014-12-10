@@ -37,15 +37,15 @@ def createTrieFromDictionaryFile():
 
 def randomChild(self):
 	children = self.children;
+	return choice(list(children.keys()));
 
 def main():
 	root = createTrieFromDictionaryFile();
-	root.display();
-	printGhostDirections();
-	stng = '';
-	while True:
-		stng = requestAndCheckHumanMove(root, stng);
-		stng = requestAndCheckComputerMove(root, stng);
+	# printGhostDirections();
+	# stng = '';
+	# while True:
+	# 	stng = requestAndCheckHumanMove(root, stng);
+	# 	stng = requestAndCheckComputerMove(root, stng);
 
 if __name__ == '__main__':
 	main();
