@@ -27,6 +27,16 @@ def requestAndCheckHumanMove(root, stng):
 		exit();
 	return stng;
 
+def requestAndCheckComputerMove(root, stng):
+	stng += searchForNextLetter(root, stng);
+	print(' ', stng, '<-- computer replied');
+	if root.search(stng) == True:
+		print('------------------------------------------');
+		print(' COMPUTER LOSES because "', stng, '" is a word.', sep = '');
+		print('---------------< GAME OVER >--------------');
+		exit();
+	return stng;
+
 def createTrieFromDictionaryFile():
 	file1 = open('GhostDictionary.py');
 	root = Trie.Node('*');
@@ -39,6 +49,15 @@ def randomChild(self):
 	children = self.children;
 	return choice(list(children.keys()));
 
+def searchForNextLetter(self, stng):
+	if len(stng) == 0:
+		return randomChild(self);
+	val = stng[0];
+	if val in self.children:
+		return self.children[val].search(stng[1:]);
+	else:
+		return None;
+
 def fragmentInDictionary(self, stng):
 	if len(stng) == 0:
 		return True;
@@ -50,11 +69,11 @@ def fragmentInDictionary(self, stng):
 
 def main():
 	root = createTrieFromDictionaryFile();
-	# printGhostDirections();
-	# stng = '';
-	# while True:
-	# 	stng = requestAndCheckHumanMove(root, stng);
-	# 	stng = requestAndCheckComputerMove(root, stng);
+	printGhostDirections();
+	stng = '';
+	while True:
+		stng = requestAndCheckHumanMove(root, stng);
+		stng = requestAndCheckComputerMove(root, stng);
 
 if __name__ == '__main__':
 	main();
