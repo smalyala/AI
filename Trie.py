@@ -50,6 +50,11 @@ class Node(object):
 		else:
 			return False;
 
+	def spellWordFromString(self, stng):
+		while self.search(stng) == False:
+			stng += self.searchForNextLetter(stng);
+		return stng;
+
 	def randomChild(self):
 		children = self.children;
 		return choice(list(children.keys()));
@@ -62,7 +67,6 @@ class Node(object):
 			return self.children[val].searchForNextLetter(stng[1:]);
 		else:
 			return None;
-
 
 	def fragmentInDictionary(self, stng):
 		if len(stng) == 0:
