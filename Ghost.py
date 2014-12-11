@@ -21,7 +21,7 @@ def requestAndCheckHumanMove(root, stng):
 		print(' HUMAN LOSES because "', stng, \
 			  '"\n does not begin any word.', sep = '');
 		print(" [The computer's word was ", '"', \
-			    spellWordFromString(root, stng[0:-1]), '".]', sep = '');
+			    root.spellWordFromString(stng[0:-1]), '".]', sep = '');
 		print('---------------< GAME OVER >--------------');
 		exit();
 	return stng;
@@ -35,9 +35,6 @@ def requestAndCheckComputerMove(root, stng):
 		print('---------------< GAME OVER >--------------');
 		exit();
 	return stng;
-
-def spellWordFromString(root, stng):
-	return 'NOT WORKING YET';
 
 def createTrieFromDictionaryFile():
 	file1 = open('GhostDictionary.py');
