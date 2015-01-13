@@ -914,25 +914,22 @@ def maxValue(depth, alpha, beta): # Recursive (odd ply) returns best move for HU
 
 #-----------Make a HUMAN move and store the move with its value in tuplesOfValuesWithTheirMoves.
 #           The value of the HUMAN move is the minimum score the COMPUTER can obtain in response.
-            ...
+#            ...
             makeTheMoveAndTurnOverThePieces(r, c, piecesTurnedOver, HUMAN)
             if depth == 0:
               return boardScore();
             else:
-              childValue = minValue(depth-1, alpha, beta), r, c;
-            tuplesOfValuesWithTheirMoves.append(childValue);
+              childValue = minValue(depth-1, alpha, beta), r, c
+            tuplesOfValuesWithTheirMoves.append(childValue)
             takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, HUMAN)
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
 
-    maxv = -100;
-    for f in tuplesOfValuesWithTheirMoves:
-      (x, y, z) = f;
-      if maxv < x:
-        maxv = x;
-    return maxv;
 #---Return
-    ...
+#    ...
+    if tuplesOfValuesWithTheirMoves:
+      return max(tuplesOfValuesWithTheirMoves);
+    return None;
 #----------------------------------------------------------------------------------------------------Othello--
 
 def minValue(depth, alpha, beta): # Recursive (even ply) Returns best move for COMPUTER.
@@ -956,21 +953,18 @@ def minValue(depth, alpha, beta): # Recursive (even ply) Returns best move for C
             if depth == 0:
               return boardScore();
             else:
-              childValue = maxValue(depth-1, alpha, beta), r, c;
-            tuplesOfValuesWithTheirMoves.append(childValue);
+              childValue = maxValue(depth-1, alpha, beta), r, c
+            tuplesOfValuesWithTheirMoves.append(childValue)
             takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, COMPUTER)
 #           ...
 
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
-    minv = 100;
-    for f in tuplesOfValuesWithTheirMoves:
-      (x, y, z) = f;
-      if minv > x:
-        minv = x;
-    return minv;
 
 #---Return
+    if tuplesOfValuesWithTheirMoves:
+      return min(tuplesOfValuesWithTheirMoves);
+    return None;
 #====================================<GLOBAL CONSTANTS and GLOBAL IMPORTS>====================================
 
 from tkinter  import Tk, Canvas, YES, BOTH  # <-- Use Tkinter (capital "T") in Python 2.x
