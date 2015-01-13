@@ -925,6 +925,12 @@ def maxValue(depth, alpha, beta): # Recursive (odd ply) returns best move for HU
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
 
+    maxv = -100;
+    for f in tuplesOfValuesWithTheirMoves:
+      (x, y, z) = f;
+      if maxv < x:
+        maxv = x;
+    return maxv;
 #---Return
     ...
 #----------------------------------------------------------------------------------------------------Othello--
@@ -957,7 +963,13 @@ def minValue(depth, alpha, beta): # Recursive (even ply) Returns best move for C
 
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
-    
+    minv = 100;
+    for f in tuplesOfValuesWithTheirMoves:
+      (x, y, z) = f;
+      if minv > x:
+        minv = x;
+    return minv;
+
 #---Return
 #====================================<GLOBAL CONSTANTS and GLOBAL IMPORTS>====================================
 
