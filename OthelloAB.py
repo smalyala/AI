@@ -892,80 +892,78 @@ def computersMove(depth): # (even ply) This function is similar to the minValue 
 
 #---Return the move with minimum boardScore of all possible COMPUTER moves in the current position.
 #    ...
-    tup = min(setOfMoveValuesAndMoves);
-    return tup[1], tup[2], LocateTurnedPieces(tup[1], tup[2], COMPUTER);
+    if setOfMoveValuesAndMoves:
+      tup = min(setOfMoveValuesAndMoves);
+      return tup[1], tup[2], LocateTurnedPieces(tup[1], tup[2], COMPUTER);
+    return boardScore();
 #----------------------------------------------------------------------------------------------------Othello--
 
 def maxValue(depth, alpha, beta): # Recursive (odd ply) returns best move for HUMAN
 #---Return the HUMAN move with MAXIMUM value that can be obtained after COMPUTER's previous move.
 #   The returned tuple looks like this: (value, row, col).
-
+  if depth == 0:
+    return boardScore();
 #---Initialize.
 #   ...
-    tuplesOfValuesWithTheirMoves = []
+  tuplesOfValuesWithTheirMoves = []
 #---Look at all possible moves for HUMAN, and there may be no moves (an important special case).
-    for r in range(8):
-      for c in range(8):
-          if M[r][c] != 0:
-             continue
-          piecesTurnedOver = LocateTurnedPieces(r, c, HUMAN)
-          if not piecesTurnedOver:
-             continue
+  for r in range(8):
+    for c in range(8):
+        if M[r][c] != 0:
+           continue
+        piecesTurnedOver = LocateTurnedPieces(r, c, HUMAN)
+        if not piecesTurnedOver:
+           continue
 #           ...
 
 #-----------Make a HUMAN move and store the move with its value in tuplesOfValuesWithTheirMoves.
 #           The value of the HUMAN move is the minimum score the COMPUTER can obtain in response.
 #            ...
-          makeTheMoveAndTurnOverThePieces(r, c, piecesTurnedOver, HUMAN)
-          if depth == 0:
-            return boardScore();
-          else:
-            childValue = minValue(depth-1, alpha, beta), r, c
-          tuplesOfValuesWithTheirMoves.append(childValue)
-          takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, HUMAN)
+        makeTheMoveAndTurnOverThePieces(r, c, piecesTurnedOver, HUMAN)
+        childValue = minValue(depth-1, alpha, beta), r, c
+        tuplesOfValuesWithTheirMoves.append(childValue)
+        takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, HUMAN)
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
 
 #---Return
 #    ...
-    if tuplesOfValuesWithTheirMoves:
-      return max(tuplesOfValuesWithTheirMoves);
-    return None;
+  if tuplesOfValuesWithTheirMoves:
+    return max(tuplesOfValuesWithTheirMoves);
+  return boardScore();
 #----------------------------------------------------------------------------------------------------Othello--
 
 def minValue(depth, alpha, beta): # Recursive (even ply) Returns best move for COMPUTER.
 #---Return the COMPUTER move with MINIMUM value that can be made after HUMAN's previous move. The returned
 #   tuple looks like this: (value, row, col).
-
+  if depth == 0:
+    return boardScore();  
 #---Initialize.
-    tuplesOfValuesWithTheirMoves = []
+  tuplesOfValuesWithTheirMoves = []
 #---Look at all possible moves for HUMAN, and there may be no moves (an important special case).
-    for r in range(8):
-      for c in range(8):
-          if M[r][c] != 0:
-             continue
-          piecesTurnedOver = LocateTurnedPieces(r, c, COMPUTER)
-          if not piecesTurnedOver:
-             continue
+  for r in range(8):
+    for c in range(8):
+        if M[r][c] != 0:
+           continue
+        piecesTurnedOver = LocateTurnedPieces(r, c, COMPUTER)
+        if not piecesTurnedOver:
+           continue
 
 #-----------Make a COMPUTER move and store the move with its value in tuplesOfValuesWithTheirMoves.
 #           The value of the COMPUTER's move is the maximum score the HUMAN can obtain in response.\
-          makeTheMoveAndTurnOverThePieces(r, c, piecesTurnedOver, COMPUTER)
-          if depth == 0:
-            return boardScore();
-          else:
-            childValue = maxValue(depth-1, alpha, beta), r, c
-          tuplesOfValuesWithTheirMoves.append(childValue)
-          takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, COMPUTER)
+        makeTheMoveAndTurnOverThePieces(r, c, piecesTurnedOver, COMPUTER)
+        childValue = maxValue(depth-1, alpha, beta), r, c
+        tuplesOfValuesWithTheirMoves.append(childValue)
+        takeBackTheMoveAndTurnBackOverThePieces(r,c, piecesTurnedOver, COMPUTER)
 #           ...
 
 #-----------Attempt alpha-beta pruning.
 #           [Omit this code for now, but keep the place-marker (comment) in your code.]
 
 #---Return
-    if tuplesOfValuesWithTheirMoves:
-      return min(tuplesOfValuesWithTheirMoves);
-    return None;
+  if tuplesOfValuesWithTheirMoves:
+    return min(tuplesOfValuesWithTheirMoves);
+  return boardScore();
 #====================================<GLOBAL CONSTANTS and GLOBAL IMPORTS>====================================
 
 from tkinter  import Tk, Canvas, YES, BOTH  # <-- Use Tkinter (capital "T") in Python 2.x
