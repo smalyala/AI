@@ -988,7 +988,7 @@ pointValueMatrixforWhite, pointValueMatrixforBlack =  initializePointMatrices() 
 M          =  createMatrix()            # <-- Global, because no variable can be passed to the click function.
 HUMAN      =  1 # = Black
 COMPUTER   = -1 # = White
-DEPTH      =  4 # if DEPTH = 4, the computer can be beaten occasionally, and 2/3 of the nodes are pruned!
+DEPTH      =  6 # if DEPTH = 4, the computer can be beaten occasionally, and 2/3 of the nodes are pruned!
                 # At depth = 8, the computer will rarely take longer than 11 seconds.
 #===================================================<MAIN>====================================================
 
