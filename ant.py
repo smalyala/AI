@@ -81,11 +81,11 @@ def modifyColors(ant, matrix):
 		heading = (heading - 1) % 4;
 	ant[0] = heading;
 #---Find number of next color.
-	mycolor = (mycolor + 1) % 4;
+	mycolor = (mycolor + 1) % NUMBER_OF_COLORS;
 #---Flip the new cell's color in matrix.
 	matrix[row][col] = mycolor;
 #---Display the new cell's color on screen.
-	canvas.create_line(row, col, row+5, col+5, width = 1, fill = COLORS[mycolor])
+	plot(row, col, COLORS[mycolor])
 #--------------------------------------------------------------------------------------------AUTOMATED ANT--
 def maketheAntsJourney(ant, matrix):
 	message = 'PROGRAM CURRENTLY RUNNING ' + str(STEPS) + ' ant moves in ' + str(SPEED_INC) + ' increments.'
