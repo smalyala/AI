@@ -4,9 +4,11 @@
 #       Period: 1 	   #
 ########################
 
-def returnNewLetter(let, times):
-	newLetter = ord(let) + times;
-	#print(let, times, newLetter, chr(newLetter));
+def returnNewLetter(let, times):	#appropriately changes each letter 
+	if times < 0:
+		newLetter = ord(let) - ((-1*times) % 26);
+	else:
+		newLetter = ord(let) + (times % 26);
 	if times > 0:
 		if newLetter > 122:
 			newLetter = (newLetter % 122) + 96;
@@ -19,7 +21,7 @@ def returnNewLetter(let, times):
 			newLetter = 25 - (96 - newLetter) + 97;
 	return chr(newLetter);
 
-def returnNewString(stng, times):
+def returnNewString(stng, times):	#runs through string and calls returnNewLetter function on each letter
 	newString = "";
 	for letter in stng:
 		if (64 < ord(letter) and ord(letter) < 91) or (96 < ord(letter) and ord(letter) < 123):
@@ -28,6 +30,9 @@ def returnNewString(stng, times):
 			newString += letter;
 	return newString;
 
-stringToShift = "CHEER!";
-timesToShift = 7;
-print(returnNewString(stringToShift, timesToShift));
+def main():		#runs the program
+	stringToShift = "CcCcC!";
+	timesToShift = -54;
+	print(returnNewString(stringToShift, timesToShift));
+
+main();
