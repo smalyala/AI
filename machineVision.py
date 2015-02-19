@@ -55,14 +55,12 @@ class ImageFrame:
 		self.img = PhotoImage(width = WIDTH, height = HEIGHT)
 		for row in range(HEIGHT):
 			for col in range(WIDTH):
-				#print(row*WIDTH + col, WIDTH, row, col, len(image));
-				if (row*WIDTH + col) < len(image):
-					num = image[row*WIDTH + col]
-					if COLORFLAG == True:
-						kolor = '#%02x%02x%02x' % (num[0], num[1], num[2])
-					else:
-						kolor = '#%02x%02x%02x' % (num, num, num)
-					self.img.put(kolor, (col, row))
+				num = image[row*WIDTH + col]
+				if COLORFLAG == True:
+					kolor = '#%02x%02x%02x' % (num[0], num[1], num[2])
+				else:
+					kolor = '#%02x%02x%02x' % (num, num, num)
+				self.img.put(kolor, (col, row))
 		c = Canvas(root, width = WIDTH, height = HEIGHT); c.pack()
 		c.create_image(0, 0, image = self.img, anchor = NW)
 		printElapsedTime('displayed image')
