@@ -1,0 +1,14 @@
+from pickle import load
+nbr = load(open('fullList.pkl', 'rb'))
+count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+full = []
+for key in iter(nbr):
+   count[len(nbr[key])] = count[len(nbr[key])] + 1
+   if len(nbr[key]) == 14:
+      full.append(key) 
+print(full[0])
+print(nbr[full[0]])
+print(full[1])
+print(nbr[full[1]])
+print(full[2])
+print(nbr[full[2]])

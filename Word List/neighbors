@@ -1,0 +1,31 @@
+#
+from pickle import dump
+#
+def arenbr(word1, word2):
+   nbr = False
+   count = 0
+   j = 0
+   while j < 6:
+      if word1[j] != word2[j]:
+         count += 1
+      j += 1
+   if count == 1:
+      nbr = True
+   return nbr
+#
+wordList = open('words.txt').read().split()
+#
+nbr = {}
+tot = len(wordList)
+i = 0
+while i < tot:
+   j = 0
+   nbr[wordList[i]] = []
+   while j < tot:
+      if arenbr(wordList[i], wordList[j]):
+         nbr[wordList[i]].append(wordList[j])
+      j += 1
+   i += 1
+fil = open('fullList.pkl', 'wb')
+dump(nbr, fil, protocol = 2)
+fil.close()

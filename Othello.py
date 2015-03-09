@@ -632,6 +632,37 @@ def makeComputerReply2():
                  finalPieces = computerPieces
               M = deepcopy(MM)
     makeMove(bestCol, bestRow, finalPieces, COMPUTER)
+    
+
+#--Move into upper left corner (0,0) if possible.
+
+   pieces = LocateTurnedPieces (0, 0, COMPUTER)
+   if pieces != []:
+      makeMove(0, 0, pieces, COMPUTER)
+      printBestPotentialReply(COMPUTER) # <--Optional feature
+      return
+
+#--Move into lower right corner (7,7) if possible.
+   pieces = LocateTurnedPieces(7, 7, COMPUTER)
+   if pieces != []:
+      makeMove(7, 7, pieces, COMPUTER)
+      printBestPotentialReply(COMPUTER) # <--Optional feature
+      return
+
+#--Move into lower left corner (0,7) if possible.
+   pieces = LocateTurnedPieces(0, 7, COMPUTER)
+   if pieces != []:
+      makeMove(7, 0, pieces, COMPUTER)
+      printBestPotentialReply(COMPUTER) # <--Optional feature
+      return
+
+#--Move into upper right corner (7,0) if possible.
+   pieces = LocateTurnedPieces(7, 0, COMPUTER)
+   if pieces != []:
+      makeMove(0, 7, pieces, COMPUTER)
+      printBestPotentialReply(COMPUTER) # <--Optional feature
+      return
+
 #----------------------------------------------------------------------------------------------------Othello--
 
 def displayAllLegalMovesForHumanPlayer(kolor):
@@ -741,31 +772,3 @@ if __name__ == '__main__':  main()
 
 
 
-## #--Move into upper left corner (0,0) if possible.
-##
-##    pieces = LocateTurnedPieces (0, 0, COMPUTER)
-##    if pieces != []:
-##       makeMove(0, 0, pieces, COMPUTER)
-##       printBestPotentialReply(COMPUTER) # <--Optional feature
-##       return
-##
-## #--Move into lower right corner (7,7) if possible.
-##    pieces = LocateTurnedPieces(7, 7, COMPUTER)
-##    if pieces != []:
-##       makeMove(7, 7, pieces, COMPUTER)
-##       printBestPotentialReply(COMPUTER) # <--Optional feature
-##       return
-##
-## #--Move into lower left corner (0,7) if possible.
-##    pieces = LocateTurnedPieces(0, 7, COMPUTER)
-##    if pieces != []:
-##       makeMove(7, 0, pieces, COMPUTER)
-##       printBestPotentialReply(COMPUTER) # <--Optional feature
-##       return
-##
-## #--Move into upper right corner (7,0) if possible.
-##    pieces = LocateTurnedPieces(7, 0, COMPUTER)
-##    if pieces != []:
-##       makeMove(0, 7, pieces, COMPUTER)
-##       printBestPotentialReply(COMPUTER) # <--Optional feature
-##       return
