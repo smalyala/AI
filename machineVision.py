@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 from tkinter import * 
 from time import clock
 from copy import *
 from math import sqrt
-=======
-from tkinter import *
-from time import clock
->>>>>>> origin/master
+
 
 root = Tk()
 START = clock()
@@ -35,7 +31,6 @@ def main():
 		image.append(int(.2*RGB[0] + .7*RGB[1] + .1*RGB[2]))
 	printElapsedTime('Gray numbers are now created.')
 
-<<<<<<< HEAD
 	imageCopy = deepcopy(image);
 	for x in range(3):
 		for r in range(HEIGHT):
@@ -63,8 +58,6 @@ def main():
 				else:
 					image[r * WIDTH + c] = 255;
 
-=======
->>>>>>> origin/master
 	file1 = open('grayScale.ppm', 'w')
 	for elt in image:
 		file1.write(str(elt) + " ")
@@ -101,8 +94,5 @@ class ImageFrame:
 		c = Canvas(root, width = WIDTH, height = HEIGHT); c.pack()
 		c.create_image(0, 0, image = self.img, anchor = NW)
 		printElapsedTime('displayed image')
-<<<<<<< HEAD
 main();
-=======
-main();
->>>>>>> origin/master
+
