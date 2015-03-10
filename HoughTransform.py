@@ -1,6 +1,7 @@
 from tkinter import *
 from time import clock
 from random import randint
+from math import *
 
 root = Tk()
 START = clock()
@@ -36,11 +37,18 @@ def imageNoise(points, image):
 		c = randint(0, WIDTH-1);
 		image[WIDTH*r+c] = 255;
 
-def drawLine(m, b, image):
+def drawLineMB(m, b, image):
 	for x in range(WIDTH):
-		index = WIDTH * (m*x+b) + x;
+		index = WIDTH * int(m*x+b) + x;
 		if 0 <= index < len(image):
 			image[index] = 255;
+
+def drawLineRT(r, T, image):
+	x = r * cos(T);
+	y = r * sin(T);
+	m = -x/y;
+	b = x*x/y + y;
+	drawLineMB(m, b, image);
 
 def drawCircle(r, image):
 	for x in range(WIDTH):
@@ -51,10 +59,11 @@ def drawCircle(r, image):
 
 def main():
 	image = [0] * HEIGHT * WIDTH
-	imageNoise(500, image);
-	drawLine(0, 100, image);
-	drawLine(1, 0, image);
-	drawCircle(50, image)
+	#imageNoise(500, image);
+	#drawLine(0, 100, image);
+	#drawLineMB(1, 0, image);
+	drawLineRT(300, pi/3, image);
+	#drawCircle(50, image)
 	displayImageWindow(image);
 	root.mainloop()
 main();
