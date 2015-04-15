@@ -1,4 +1,6 @@
 from random import *
+from math import *
+
 MAX = 20
 POP = 200
 
@@ -26,19 +28,19 @@ def allSame(matrix):
 def main():
 	population = createPopulation();
 	sameYet = False
-	y = 0
-	for x in range(POP):
-		H = len(population[x])//2
-		x = int(population[x][0:H], 2)
-		y = int(population[x][H:], 2)
-		population[x] = (cost(x, y), population[x])
+	z = 0
+	for s in range(POP):
+		H = len(population[s])//2
+		x = int(population[s][0:H], 2)
+		y = int(population[s][H:], 2)
+		population[s] = (cost(x, y), population[s])
 	while sameYet == False:
 		newPop = []
-		for x in range(POP):
-			H = len(population[x][1])//2
-			x = int(population[x][1][0:H], 2)
-			y = int(population[x][1][H:], 2)
-			population[x] = (cost(x, y), population[x][1])
+		for s in range(POP):
+			H = len(population[s][1])//2
+			x = int(population[s][1][0:H], 2)
+			y = int(population[s][1][H:], 2)
+			population[s] = (cost(x, y), population[s][1])
 		population.sort()
 		population.reverse()
 		for s in range(1, (len(population)//2)+1):
@@ -50,10 +52,8 @@ def main():
 			newPop.append(child1)
 			newPop.append(child2)
 		population = newPop
-		y += 1
+		z += 1
 		sameYet = allSame(population)
-		# print('	 Generation ' + repr(y+1))
-		# printMatrix(population)
-	print('	 Generation ' + repr(y+1))
+	print('	 Generation ' + repr(z))
 	printMatrix(population)
 main()
